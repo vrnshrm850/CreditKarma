@@ -25,7 +25,7 @@ import {
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DiagAddGroupComponent } from './diag-add-group/diag-add-group.component';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatIconModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 
@@ -48,6 +48,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatInputModule,
     MatDividerModule,
+    MatIconModule,
   ],
   declarations: [
     AppComponent,
