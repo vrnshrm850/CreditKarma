@@ -29,6 +29,7 @@ import { DiagAddGroupComponent } from './diag-add-group/diag-add-group.component
 import { MatCardModule, MatIconModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     AdminLayoutComponent,
     DiagAddGroupComponent,
+    LoginComponent
 
   ],
   entryComponents: [

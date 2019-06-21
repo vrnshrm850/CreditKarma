@@ -8,4 +8,8 @@ import { Component} from '@angular/core';
 })
 export class AppComponent {
 
+
+  isUserLoggedIn(){
+    return  localStorage.getItem('isLoggedIn');
+   }
 }
