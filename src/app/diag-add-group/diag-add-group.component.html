@@ -5,7 +5,7 @@
            <div  class="row"> 
                 <div >
              <mat-form-field >
-              <input matInput [(ngModel)]="groupName" placeholder="Group Name"   type="text" >
+              <input matInput [(ngModel)]="groupName" placeholder="Group Name" id="groupInp"  type="text" >
              
               </mat-form-field>
            </div>
@@ -19,6 +19,9 @@
             <button [disabled]="disableGroupButton" (click)="addGroup()" class=" pull-right add-grp-btn">Add Group</button>
           </div>
         </div>
+
+
+
 <mat-card *ngIf="groupName && disableGroupButton" id="bot-margin">
   <mat-card-content>
       <div class="row">
@@ -38,17 +41,21 @@
      
       
         
-    <div *ngIf="groupName && disableGroupButton"  class="level2">
+    <div *ngIf="groupName && disableGroupButton "  class="level2">
       <mat-card>
           <mat-card-subtitle>{{groupName}}</mat-card-subtitle>
          
+
+
+
+
       
           <mat-card  *ngFor="let obj of fieldsArray; let i = index">
-              <mat-card-subtitle>{{obj.title}}<button class= "pull-right"  id="add-info" (click)="add-info()">Add Information</button>
+              <mat-card-subtitle>{{obj.title}}<button class= "pull-right"  id="add-info" (click)="toggleId(i)">Add Information</button>
                 
               </mat-card-subtitle>
               <mat-card-content>
-                <div class="row">
+                <div  *ngIf="!obj.isInfo" class="row">
                  <div>
                   <mat-form-field>
                       <mat-label>Data Type</mat-label>
@@ -73,11 +80,63 @@
                 </div>
                 
               </div>
+
+
+
+
+
+
+              <div  *ngIf="obj.isInfo">
+                <div class="row">
+                  <div>
+                      <mat-form-field>
+                        <input matInput [(ngModel)] = "categoryName" placeholder="Category Name" type="text">
+                      </mat-form-field>
+                      </div>
+                <!-- <div  >
+                  <button class=" pull-right add-catg-btn" [disabled]="!categoryName" (click)="addCategory()" >Delete Category</button>
+              </div> -->
+            </div>
+
+              <div class="row">
+                <div >     
+                 <mat-form-field>
+                     <mat-label>Data Type</mat-label>
+                     <mat-select disableRipple>
+                       <mat-option *ngFor="let dataTypes of obj.dataType" [value]="dataTypes.value">{{dataTypes.name}}</mat-option>
+                      
+                     </mat-select>
+                   </mat-form-field>
+                 </div>
+               <div >
+                   <mat-form-field>
+                       <mat-label>Format</mat-label>
+                       <mat-select disableRipple>
+                         <mat-option *ngFor="let format of obj.format" [value]="format.value">{{format.name}}</mat-option>
+                       </mat-select>
+                     </mat-form-field>
+               </div>
+               
+               <div >
+                   <button  id="delete-category" (click)='deleteCategory(i)'><i class="material-icons">
+                       delete_outline
+                       </i></button>
+               </div>
+              </div>
+             </div>
+
+
+
+
               </mat-card-content>
           </mat-card>
         </mat-card>
      
-  </div>
+    </div>
+
+
+
+      
 </div>
 
 

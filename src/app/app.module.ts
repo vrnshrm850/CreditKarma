@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import {MatInputModule} from '@angular/material/input';
 
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
@@ -49,6 +50,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatDividerModule,
     MatIconModule,
+  
   ],
   declarations: [
     AppComponent,

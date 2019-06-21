@@ -15,11 +15,12 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
   data:any;
   groupName: any = '';
   categoryName: any = '';
+  infoBox:any = '';
  fieldsArray: any = [];
  disableCategoryButton: Boolean = false;
  disableGroupButton: Boolean = false;
 
-
+ showId = false;
  
 
 
@@ -40,6 +41,7 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
   addCategory(){
     let obj =  {
+      isInfo: false,
       title: this.categoryName,
       dataType:[{name: 'Numeric', value:'number'},
                 {name: 'Boolean', value:'boolean'}
@@ -53,6 +55,7 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
       this.categoryName =  "";
       
+      
   }
 
   cancel(): any {
@@ -63,15 +66,24 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
 addGroup(){
   this.disableGroupButton = true;
+  
 }
 
 deleteCategory(i){
   this.fieldsArray.splice(i, 1);
 console.log(i);
 
-
 }
-addInfo(){
+
+toggleId(i){
+  this.fieldsArray.forEach((obj, index) => {
+    if(i == index){
+      obj.isInfo = !obj.isInfo;
+    }
+  });
+  
+   // this.showId = !this.showId;
   
 }
+
 }
