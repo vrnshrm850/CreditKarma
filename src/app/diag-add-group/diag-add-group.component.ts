@@ -5,16 +5,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 
+
 @Component({
   selector: 'app-diag-add-group',
   templateUrl: './diag-add-group.component.html',
   styleUrls: ['./diag-add-group.component.scss']
 })
 export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
-  @ViewChild('addGroupMainDiv') _addGroup: ElementRef;
   data:any;
+ 
   groupName: any = '';
   categoryName: any = '';
+  categoryName2: any = '';
   infoBox:any = '';
  fieldsArray: any = [];
  disableCategoryButton: Boolean = false;
@@ -22,6 +24,11 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
  showId = false;
  
+
+ templateJson:object={
+
+};
+
 
 
   constructor(public dialogRef: MatDialogRef<DiagAddGroupComponent>,
@@ -38,23 +45,32 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
  //   let ele = this.element.nativeElement.querySelector('#addGroupMainDiv');
 
   }
+  
 
   addCategory(){
     let obj =  {
       isInfo: false,
       title: this.categoryName,
+      info:[],
+      tempInfoName: '',
       dataType:[{name: 'Numeric', value:'number'},
                 {name: 'Boolean', value:'boolean'}
                  ],
-      format:[{name: '%', value:'percent'},
-                {name: '$', value:'dollar'}
+      format:[{name: '%', value:'%'},
+                {name: '$', value:'$'}
                  ],
+
+                 
       };
 
       this.fieldsArray.push(obj);
 
       this.categoryName =  "";
-      
+
+      this.templateJson[this.groupName][this.categoryName] = {};
+     
+
+
       
   }
 
@@ -66,12 +82,16 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
 addGroup(){
   this.disableGroupButton = true;
-  
+
+  this.templateJson[this.groupName] = {};
+
+
 }
 
-deleteCategory(i){
-  this.fieldsArray.splice(i, 1);
-console.log(i);
+deleteCategory(i,j){
+  this.fieldsArray[i].info.splice(j,1)
+//  this.fieldsArray.splice(i, 1);
+
 
 }
 
@@ -82,8 +102,50 @@ toggleId(i){
     }
   });
   
-   // this.showId = !this.showId;
+   
   
 }
+
+saveInfo(i){
+
+  let infoObj = {name: this.fieldsArray[i].tempInfoName, type: '', formatValue: null};
+
+  this.fieldsArray[i].info.push(infoObj);
+  this.fieldsArray[i].tempInfoName = '';
+//console.log(this.fieldsArray);
+  
+}
+
+submit(){
+  this.fieldsArray.forEach((obj, index) => {
+    this.templateJson[this.groupName][obj.title] = {};
+
+    if(obj.isInfo == true){
+ obj.info.forEach((obj1: any, key: number) => {
+  this.templateJson[this.groupName][obj.title][obj1.name] = {};
+ 
+   this.templateJson[this.groupName][obj.title][obj1.name].type= obj1.type;
+   this.templateJson[this.groupName][obj.title][obj1.name].format= obj1.formatValue;
+   this.templateJson[this.groupName][obj.title][obj1.name].required = true;
+   console.log(this.templateJson);
+ 
+ });
+    }
+    else{
+      this.templateJson[this.groupName][obj.title].type = obj.type;
+      this.templateJson[this.groupName][obj.title].format = obj.formatValue;
+      this.templateJson[this.groupName][obj.title].required = true;
+    console.log(this.templateJson);
+  }});
+
+
+}
+
+saveInfoType(){
+  console.log(this.fieldsArray);
+}
+
+
+
 
 }

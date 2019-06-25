@@ -1,17 +1,18 @@
 <h6 mat-dialog-title class="bg-title">Fields</h6>
+
 <mat-dialog-content class="mat-typography">
     
-        <div class="addGroup" #addGroupMainDiv>
+        <div class="addGroup" #addGroupMainDiv name="formGroup">
            <div  class="row"> 
                 <div >
              <mat-form-field >
-              <input matInput [(ngModel)]="groupName" placeholder="Group Name" id="groupInp"  type="text" >
+              <input matInput [(ngModel)]="groupName" placeholder="Group Name" value="" name="Group name" id="groupInp"  type="text" >
              
               </mat-form-field>
            </div>
           <div >
             <mat-form-field >
-                <input matInput  placeholder="Display Order" type="number"  >
+                <input matInput  placeholder="Display Order" value="" name="Display Order" type="number"  >
                
               </mat-form-field>
             </div>
@@ -27,7 +28,7 @@
       <div class="row">
           <div>
               <mat-form-field>
-                <input matInput [(ngModel)] = "categoryName" placeholder="Category Name" type="text">
+                <input matInput [(ngModel)] = "categoryName" name="Category name" value="" placeholder="Category Name" type="text">
               </mat-form-field>
               </div>
         <div  >
@@ -59,8 +60,8 @@
                  <div>
                   <mat-form-field>
                       <mat-label>Data Type</mat-label>
-                      <mat-select disableRipple>
-                        <mat-option *ngFor="let dataTypes of obj.dataType" [value]="dataTypes.value">{{dataTypes.name}}</mat-option>
+                      <mat-select disableRipple [(ngModel)]="obj.type" name="Data Type">
+                        <mat-option *ngFor="let dataTypes of obj.dataType"  [value]="dataTypes.value">{{dataTypes.name}}</mat-option>
                        
                       </mat-select>
                     </mat-form-field>
@@ -68,7 +69,7 @@
                 <div >
                     <mat-form-field>
                         <mat-label>Format</mat-label>
-                        <mat-select disableRipple>
+                        <mat-select disableRipple name="Format" [(ngModel)]="obj.formatValue">
                           <mat-option *ngFor="let format of obj.format" [value]="format.value">{{format.name}}</mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -86,41 +87,47 @@
 
 
 
-              <div  *ngIf="obj.isInfo">
+              <div  *ngIf="obj.isInfo ">
                 <div class="row">
                   <div>
                       <mat-form-field>
-                        <input matInput [(ngModel)] = "categoryName" placeholder="Category Name" type="text">
+                        <input matInput [(ngModel)] = "obj.tempInfoName" name="Category name" placeholder="Category Name" type="text">
                       </mat-form-field>
+                      <button class= "pull-right" (click)="saveInfo(i)">Save Info</button>
                       </div>
                
             </div>
+<div  *ngFor="let infoObj  of obj.info; let j= index ">  
+    <div class="row">
+      <p>{{infoObj.name}}</p>
+      <div >     
+       <mat-form-field>
+           <mat-label>Data Type</mat-label>
+           <mat-select [(ngModel)] = "infoObj.type" disableRipple name="Data Type" (selectionChange)="saveInfoType()">
+             <mat-option *ngFor="let dataTypes of obj.dataType" [value]="dataTypes.value">{{dataTypes.name}}</mat-option>
+            
+           </mat-select>
+         </mat-form-field>
+       </div>
+     <div >
+         <mat-form-field>
+             <mat-label>Format</mat-label>
+             <mat-select disableRipple name="Format" [(ngModel)]="infoObj.formatValue">
+               <mat-option *ngFor="let format of obj.format" [value]="format.value">{{format.name}}</mat-option>
+             </mat-select>
+           </mat-form-field>
+           
+     </div>
+     
+     <div >
+         <button  id="delete-category" (click)='deleteCategory(i,j)'><i class="material-icons">
+             delete_outline
+             </i></button>
+     </div>
+    </div>
+</div>
+            
 
-              <div class="row">
-                <div >     
-                 <mat-form-field>
-                     <mat-label>Data Type</mat-label>
-                     <mat-select disableRipple>
-                       <mat-option *ngFor="let dataTypes of obj.dataType" [value]="dataTypes.value">{{dataTypes.name}}</mat-option>
-                      
-                     </mat-select>
-                   </mat-form-field>
-                 </div>
-               <div >
-                   <mat-form-field>
-                       <mat-label>Format</mat-label>
-                       <mat-select disableRipple>
-                         <mat-option *ngFor="let format of obj.format" [value]="format.value">{{format.name}}</mat-option>
-                       </mat-select>
-                     </mat-form-field>
-               </div>
-               
-               <div >
-                   <button  id="delete-category" (click)='deleteCategory(i)'><i class="material-icons">
-                       delete_outline
-                       </i></button>
-               </div>
-              </div>
              </div>
 
 
@@ -133,7 +140,7 @@
     </div>
 
 
-
+    
       
 </div>
 
@@ -142,5 +149,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Close</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close]="true" type= "submit" (click)="submit()" cdkFocusInitial>Save</button>
 </mat-dialog-actions>
+
