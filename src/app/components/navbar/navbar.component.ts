@@ -123,7 +123,7 @@ export class NavbarComponent implements OnInit {
       return 'Dashboard';
     }
     logout(){
-        localStorage.removeItem('isLoggedIn');
-        
+        localStorage.removeItem('token');
+        this.router.navigate(['/']);
     }
 }

@@ -115,7 +115,6 @@ saveInfo(i){
 
   this.fieldsArray[i].info.push(infoObj);
   this.fieldsArray[i].tempInfoName = '';
-//console.log(this.fieldsArray);
   
 }
 
@@ -130,7 +129,6 @@ submit(){
    this.templateJson[this.groupName][obj.title][obj1.name].type= obj1.type;
    this.templateJson[this.groupName][obj.title][obj1.name].format= obj1.formatValue;
    this.templateJson[this.groupName][obj.title][obj1.name].required = true;
-   console.log(this.templateJson);
  
  });
     }
@@ -138,14 +136,12 @@ submit(){
       this.templateJson[this.groupName][obj.title].type = obj.type;
       this.templateJson[this.groupName][obj.title].format = obj.formatValue;
       this.templateJson[this.groupName][obj.title].required = true;
-    console.log(this.templateJson);
   }});
 
 
 }
 
 saveInfoType(){
-  console.log(this.fieldsArray);
 }
 
 

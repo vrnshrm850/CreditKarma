@@ -1,8 +1,8 @@
 <div class="wrapper">
     <form id="loginForm" class="form-signin">       
       <h2 class="form-signin-heading"><img src="../../assets/login-images/output-onlinepngtools.png" height="70" width="150" id="login-logo"></h2>
-      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+      <input type="text" [(ngModel)]="loginData.email" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+      <input type="password" [(ngModel)]="loginData.password" class="form-control" name="password" placeholder="Password" required=""/>      
       <label class="checkbox">
         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
       </label>

@@ -10,6 +10,6 @@ export class AppComponent {
 
 
   isUserLoggedIn(){
-    return  localStorage.getItem('isLoggedIn');
+    return  localStorage.getItem('token');
    }
 }

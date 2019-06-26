@@ -11,9 +11,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import {MatInputModule} from '@angular/material/input';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  }    from '@angular/common/http';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddUserComponent } from './dashboard/adduser.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { TypographyComponent } from './typography/typography.component';
@@ -30,6 +30,9 @@ import { MatCardModule, MatIconModule } from '@angular/material';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import { LoginComponent } from './login/login.component';
+import {AuthService} from './auth.service';
+import {AuthinterceptorService} from './authinterceptor.service';
+import {ApiService} from './api.service';
 
 @NgModule({
   imports: [
@@ -63,7 +66,9 @@ import { LoginComponent } from './login/login.component';
   entryComponents: [
     DiagAddGroupComponent
   ],
-  providers: [],
+  providers: [ApiService, AuthService, {provide: HTTP_INTERCEPTORS,
+    useClass: AuthinterceptorService,
+  multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

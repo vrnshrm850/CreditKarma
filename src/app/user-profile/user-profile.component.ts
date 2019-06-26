@@ -30,10 +30,8 @@ getaddGroups(): void {
   this.httpService.get("data/groups.json").subscribe(
     (data: any) => {
     this.appGroupsData = data as string[];
-    console.log(JSON.stringify(this.appGroupsData));
     },
     (err: HttpErrorResponse) => {
-      console.log(err)
     }
     );
 
