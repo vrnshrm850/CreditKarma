@@ -6,6 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 
 
+
 @Component({
   selector: 'app-diag-add-group',
   templateUrl: './diag-add-group.component.html',
@@ -28,10 +29,11 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
  templateJson:object={
 
 };
+  
 
 
 
-  constructor(public dialogRef: MatDialogRef<DiagAddGroupComponent>,
+  constructor( public dialogRef: MatDialogRef<DiagAddGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public _data: any,   private element: ElementRef) {
       this.data=_data;
    
@@ -39,6 +41,7 @@ export class DiagAddGroupComponent implements OnInit ,  AfterViewInit{
 
   ngOnInit() {
    let ele = this.element.nativeElement.querySelector('#addGroupMainDiv');
+   
   }
 
   ngAfterViewInit(){

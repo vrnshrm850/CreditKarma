@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { DiagAddGroupComponent } from 'app/diag-add-group/diag-add-group.component';
+import { DiagAddGroupComponent } from '../diag-add-group/diag-add-group.component';
 import {map, share} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -9,11 +11,12 @@ import {map, share} from 'rxjs/operators';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
+  appGroupsData = {};
   
-  constructor(private matDialog:MatDialog) { }
+  constructor(private httpService: HttpClient, private matDialog:MatDialog) { }
 
   ngOnInit() {
+    this.getaddGroups();
   }
   diagOpen(){
     this.matDialog
@@ -21,6 +24,19 @@ export class UserProfileComponent implements OnInit {
             .afterClosed().pipe(share(),map(confirm => {
                 return confirm;
             }),);
+}
+
+getaddGroups(): void {
+  this.httpService.get("data/groups.json").subscribe(
+    (data: any) => {
+    this.appGroupsData = data as string[];
+    console.log(JSON.stringify(this.appGroupsData));
+    },
+    (err: HttpErrorResponse) => {
+      console.log(err)
+    }
+    );
+
 }
 
 }
